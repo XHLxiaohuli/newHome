@@ -1,0 +1,23 @@
+<!DOCTYPE html><html><head><title>新营家风控管理系统</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=icon href=./static/img/Logo.png type=image/x-icon><style>*{margin: 0;padding: 0;}  html,body{height: 100%;width: 100%;}    a{text-decoration:none;}    ul,li{padding:0;margin:0;list-style:none;}</style><link rel=stylesheet type=text/css href=./static/css/dateRange.css><link rel=stylesheet href=./static/css/icons.css><script src=./static/js/echarts.min.js charset=utf-8></script><script src=./static/js/china.js charset=utf-8></script><script src=./static/js/swfobject.js charset=utf-8></script><script src=./static/js/downloadify.min.js charset=utf-8></script><script type=text/javascript charset=UTF-8 src=./static/js/ras/jsencrypt.min.js></script><script>(function (doc, win) {
+      //获取根节点个对象
+      var docEl = doc.documentElement,
+        //判断手机横屏竖屏
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            //获取根节点的宽度
+            var clientWidth = docEl.clientWidth;
+            //如果获取失败则返回
+            if (!clientWidth) return;
+            //把获取的宽度分成100等份，设置rem值
+            if(clientWidth<1920 && clientWidth>=1280){
+              docEl.style.fontSize = 100*(clientWidth / 1920) + 'px';
+            }else if(clientWidth<1280){
+              docEl.style.fontSize = 100*(1280 / 1920) + 'px';
+            }else if(clientWidth>1920){
+              docEl.style.fontSize = 100*(1920 / 1920) + 'px';
+            };
+        };
+      if (!doc.addEventListener) return;
+      win.addEventListener(resizeEvt, recalc, false);
+      doc.addEventListener('DOMContentLoaded', recalc, false);
+    })(document, window);</script><link href=./static/css/app.903f38117fc02fdacea8eb6a94028e91.css rel=stylesheet></head><body><div align=center style=height:100%><div id=app></div></div><script type=text/javascript src=./static/js/manifest.3ad1d5771e9b13dbdad2.js></script><script type=text/javascript src=./static/js/vendor.c68eed54df0e96f2cf78.js></script><script type=text/javascript src=./static/js/app.7895e387944aaa818d4d.js></script></body></html>

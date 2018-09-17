@@ -1,0 +1,328 @@
+1、搜索组件使用
+正确引入组件并且声明
+<searchModule 
+  :searchVal="数据"
+  @searchFun="回调函数返回输入框数据"
+  @selectFun="下拉选项框点击事件返回val值"
+  @timeChooseFun="日期区间筛选点击回调函数"
+/>
+
+数据格式：
+{
+  title:'',                           //搜索title
+  search:true,                        //搜索按钮（true为使用，false为不使用）
+  reset:true,                         //重置按钮（true为使用，false为不使用）
+  timeChoose:{                        //日期区间筛选
+    bool:true,                        //开关
+    id:'date1'                        //组件id
+  },
+  fill:[                              //搜索框内容
+    {
+      type:'input',                   //输入框type（类型：input）
+      s_name:'咨询客户',               //标签s_name（）
+      prompt:'咨询客户'                //提示
+    },
+    {
+      type:'timeChoose',              //日期区间筛选（类型：timeChoose）
+      s_name:'日期筛选',               //标签s_name（）
+    },
+    {
+      type:'select',                  //输入框type（类型：select）
+      s_name:'咨询师',                 //标签s_name（）
+      value:[                         //下拉框选项数组
+        { 
+          prompt:'请选择咨询师',       //提示
+          val:''                      //下拉框数据
+        },
+        { 
+          prompt:'选你老母',           //提示
+          val:'1'                     //下拉框数据
+        }
+      ]
+    }
+  ]
+},
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+2、表单组件
+<formModule 
+  :formVal="展示数据"
+  :showHeight=400                      //数据最大显示高度
+  :checkboxGroup=true                  //筛选框
+  :separation=true                     //分离列表
+  :bottomLine=false                    //下划线列表
+  :separationBorder=true               //边框加分离
+  @formClickFun="formClickFun"         //点击表信息触发
+  ref="xxx"
+>
+  <!-- 操作插槽 -->
+  <div slot="operation"></div>
+</formModule>
+
+获取筛选框筛选数据
+this.$refs.xxx.selectedIdArr
+
+数据格式：
+{
+  title:[                               
+    { 
+      name:'表-1',                      //表头-->列名称
+      type:'string',                    //数据类型（string，arry，operation，onclick）
+      tag:'zxs',                        //对应数据表示
+      highlighted:[],                   //设置高亮名词选填可多个，数据类型（数组）
+      width:30                          //占据整行宽度的百分比（数字）
+    }
+  ],
+  value:[                               //需要显示的数据
+    {   
+      zxs:''                            //需要展示的数据（字符类型、*数组类型-->数组类型看下方详解）
+    }
+  ]
+};
+
+数组类型展示数据
+[
+{
+  belongs:'image',                       //图片数据（belongs指定"image"）
+  url:''                                 //图片地址
+},{
+  belongs:'数据1',                       //数据标题
+  val:[
+    {
+      title:'出',
+      val:123
+    },
+    {
+      title:'入',
+      val:456
+    }
+  ]
+},{
+  belongs:'数据2',
+  titleShow:true,                         //是否显示title
+  onclick:true,                           //可点击
+  val:'12'
+}
+]
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+3、分页组件
+<pagingModule
+  :totalNum=''                            //总页码（数字）
+  :currentNum=''                          //当前页码（数字）
+  :showValNum=''                          //数据显示个数（数字）
+  @pagingFun="回调函数返回当前页码"
+/>
+
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+
+4、面包屑导航
+<crumbsModule
+  :crumbsCorres='默认导航参数'  
+  :crumbsVal='数据' 
+  :crumbsType="面包屑类型(subscript,btnswitch,imgswitch)"
+  @crumbsFun='回调函数返回输入框数据'
+/>
+
+subscript,btnswitch类型数据格式：
+[
+  {
+    title:'全部',
+    parameter:'0'
+  },
+  {
+    title:'分类一',
+    parameter:'1'
+  },
+  {
+    title:'分类二',
+    parameter:'2'
+  }
+]
+imgswitch类型数据格式：
+[
+  {
+    selected:require('../../assets/img/柱状图 2.png'),
+    shdown:require('../../assets/img/柱状图 .png'),
+    parameter:'0'
+  },
+  {
+    selected:require('../../assets/img/折线图.png'),
+    shdown:require('../../assets/img/折线图2.png'),
+    parameter:'1'
+  },
+  {
+    selected:require('../../assets/img/数据图2.png'),
+    shdown:require('../../assets/img/数据图.png'),
+    parameter:'2'
+  }
+],
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+5、标签组件
+<labelModule
+  ref='labelModule'
+  :labelVal="标签数组"
+/>
+this.$refs.labelModule.modify();        //父组件调用子组建修改函数
+this.$refs.labelModule.save();          //父组件调用子组建保存函数（返回最新标签数据）
+this.$refs.labelModule.separateAdd();   //父组件调用子组建单独添加功能
+this.$refs.labelModule.separateModify();//父组件调用子组建单独修改功能
+this.$refs.labelModule.separateDel();   //父组件调用子组建单独删除功能
+this.$refs.labelModule.getNewVal();     //父组件调用子组建获取新操作标签数组
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+6、遮罩组件
+<maskPopModule  
+  :bgColor="颜色"
+>
+(此处编辑插槽代码)
+</maskPopModule>
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+7、数据导出excel表组件
+<exportData
+  :iframeData="需要导出的数据"
+/>
+
+数据格式为字符串
+"1,2,3,4,5\n6,7,8,9,10\n"
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+8、下拉多选组件
+<multiSelect
+  :selectedArr="已选中数组"
+  :screeningArr="选项数组"
+  ref="xxx"
+/>
+this.$refs.xxx.selected     //获取选中的数组
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+9、弹窗表单组件
+<popOperation
+  :title="标题"
+  :popOperaVal="数据"
+  @determine="点击确定回调函数"
+  @cancel="点击取消回调函数"
+/>
+
+数据格式类型
+[
+  {
+    title:'输入框',                                //表单标题
+    type:'input',                                 //类型（input,textarea,select,specialSelect,radio）
+    prompt:'提示消息',                             //提示消息（非所有类型都有）
+  },
+  {
+    title:'多行输入框',
+    type:'textarea',
+    prompt:'提示消息',
+  },
+  {
+    title:'下拉选项框',
+    type:'select',
+    prompt:'提示消息',
+    selectValArr:[                                 //下拉选项框选择数据数组
+      {
+        text:'hehe',                               //下拉选项
+        val:'1'                                    //下拉选项代表数据
+      }
+    ]
+  },
+  {
+    title:'特殊下拉选项框',
+    type:'specialSelect',
+    selectedArr:[{
+              text:'111',
+              val:'1'
+            },],                            //已经选中的数据数组
+    screeningArr:[{
+              text:'111',
+              val:'1'
+            },],               //可选数据数组
+  },
+  {
+    title:'单选框',
+    type:'radio',
+    radioId:'radioId',                               //单选框Id
+    defaultData:'1',                                 //默认数据
+    radioVal:[                                       //单选框选择数据
+      {
+        id:'a1',                                     //选项id
+        text:'是',                                   //选项提示文字
+        val:'1'                                      //选项代表数据
+      }
+    ]
+  },
+  {
+    title:'',
+    type:'labelCard',
+    label:'object / string',
+    value:[
+      {
+        id:'id',
+        val:'文本',
+        url:'图片路径',
+        valList:[
+          '文本1',
+          '文本2'
+        ]
+      }
+    ],
+  },
+]
+
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+10、树状结构选中组件
+<treeOptions
+  ref="xxx"
+  :treeId=""      //组件id
+  :treesVal=""    //组件数据
+  @clickSele=""   //单击选中
+  @getDelVal=""   //获取被删除的数据
+  @clickSuspen="" //悬浮点击触发函数
+/>
+
+获取筛选框筛选数据
+this.$refs.xxx.getCheckBoxidFun
+
+数据结构
+[
+  {
+    id:'',                                     //单例id
+    title:'',                                  //文本题头
+    type:'',                                   //类型
+    checkbox:true,                             //是否启动选项框功能
+    dropDown:true,                             //是否启动点击下拉功能
+    delete:true,                               //是否启动删除功能
+    suspension:true,                           //是否启动鼠标移入移出悬浮功能
+    suspenArr:[''],                            //鼠标移入显示按钮
+    children:[]                                //子级数据（数据格式类型同上）
+  },
+]

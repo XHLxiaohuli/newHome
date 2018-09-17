@@ -1,0 +1,9 @@
+//图标插件
+echarts.min.js
+//中国地图
+china.js
+//日历插件
+dateRange.js
+//数据导出插件
+swfobject.js
+downloadify.min.js
